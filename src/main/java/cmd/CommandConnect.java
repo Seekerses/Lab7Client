@@ -1,6 +1,6 @@
 package cmd;
 
-import Client.ClientController;
+import client.ClientController;
 
 import java.io.IOException;
 
@@ -14,7 +14,7 @@ public class CommandConnect implements Command, Local{
             return("Please invoke this command with 2 arguments (IP, port).");
         }
         else {
-            ClientController.changeDestIP(args[0]);
+            ClientController.setDestIP(args[0]);
             ClientController.setDestPort(Integer.parseInt(args[1]));
             return null;
         }

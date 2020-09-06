@@ -1,6 +1,6 @@
 package cmd;
 
-import Control.TableController;
+import consolehandler.TableController;
 import productdata.Product;
 import productdata.ReaderProductBuilder;
 

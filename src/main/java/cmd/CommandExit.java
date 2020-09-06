@@ -1,7 +1,6 @@
 package cmd;
 
-import Client.ClientController;
-import Client.Sender;
+import client.ClientController;
 
 import java.io.IOException;
 

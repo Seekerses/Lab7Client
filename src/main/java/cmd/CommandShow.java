@@ -1,8 +1,5 @@
 package cmd;
-import Control.TableController;
-import Control.TableManager;
-
-import java.util.Hashtable;
+import consolehandler.TableController;
 
 /**
  * show all elements in String format

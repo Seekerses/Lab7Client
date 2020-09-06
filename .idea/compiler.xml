@@ -2,6 +2,8 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
+      <module name="Client.main" target="1.8" />
+      <module name="Client.test" target="1.8" />
       <module name="Lab5" target="1.8" />
       <module name="Lab5.main" target="1.8" />
       <module name="Lab5.test" target="1.8" />

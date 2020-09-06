@@ -1,10 +1,6 @@
 package cmd;
-import Control.TableController;
-import Control.TableManager;
+import consolehandler.TableController;
 import productdata.Product;
-
-import java.util.Iterator;
-import java.util.Map;
 
 /**
  * get element with the shortest name

@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Implementation-Title: Lab5
-Implementation-Version: 1.0-SNAPSHOT
+Implementation-Title: Client
+Implementation-Version: 1.0
 Main-Class: Main
 

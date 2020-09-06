@@ -1,6 +1,6 @@
 package cmd;
 
-import Client.ClientController;
+import client.ClientController;
 
 public class CommandChangePort implements Command, Local {
 

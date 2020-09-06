@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Lab5.iml" filepath="$PROJECT_DIR$/.idea/modules/Lab5.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Lab5.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Lab5.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Lab5.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Lab5.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Client.iml" filepath="$PROJECT_DIR$/.idea/modules/Client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Client.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Client.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Client.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Client.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/Laba6.iml" filepath="$PROJECT_DIR$/.idea/Laba6.iml" />
     </modules>
   </component>

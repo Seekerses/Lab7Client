@@ -52,7 +52,6 @@ public class ClientController {
             connect(port);
         } catch (IOException e) {
             e.printStackTrace();
-            th
         }
     }
 

@@ -9,7 +9,8 @@ class Sender {
     static void send(byte[] data) throws IOException{
         DatagramPacket commandPacket;
         DatagramPacket handle;
-        byte[] done = new byte[1024]; //std buffer for exchanging done reply
+        byte[] done; //std buffer for exchanging done reply
+        done = new byte[1024];
         done[0] = 33;
         boolean last = false;
 

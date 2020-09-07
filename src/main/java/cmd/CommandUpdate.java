@@ -35,7 +35,7 @@ public class CommandUpdate implements Command, Preparable{
         }
         else {
             try {
-                if (args[0] == null) {
+                if (args == null || args[0] == null) {
                     return ("Please enter ID");
                 }
                 int counter = 0;

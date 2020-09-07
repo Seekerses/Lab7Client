@@ -7,7 +7,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
-import java.util.Arrays;
 
 public class ClientController {
 
@@ -57,7 +56,7 @@ public class ClientController {
         }
     }
 
-    static void sendConnectingHandshake() throws IOException {
+    private static void sendConnectingHandshake() throws IOException {
         byte[] buf = new byte[1024];
         buf[0] = 1;
         buf[1023] = 1;

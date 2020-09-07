@@ -9,7 +9,7 @@ class Receiver {
     static byte[] getReply() throws IOException {
 
         byte[] buf = new byte[1024]; //buffer for coming bytes
-        byte[] clear = new byte[1024]; //std buffer for "everything OK" reply
+        byte[] clear = new byte[1024]; //std buffer for "everything OK" and exchanging done reply
         byte[] bad = new byte[1024]; //std buffer for "something went wrong" reply
         clear[0] = 111; // Ok signal
         bad[0] = 22; // Error signal
@@ -19,7 +19,7 @@ class Receiver {
             DatagramPacket fromServer = new DatagramPacket(buf, 1024);
             ClientController.getClientSocket().receive(fromServer);
 
-            if (Arrays.equals(fromServer.getData(), new byte[1024])) {
+            if (Arrays.equals(fromServer.getData(), clear)) {
                 break;
             }
 
@@ -36,6 +36,7 @@ class Receiver {
             }
 
         }
+        System.out.println(Arrays.toString(result));
         return result;
     }
 }

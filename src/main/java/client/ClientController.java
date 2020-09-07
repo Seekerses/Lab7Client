@@ -7,18 +7,20 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
+import java.util.Arrays;
 
 public class ClientController {
 
     private static DatagramSocket clientSocket = null;
-    private static InetAddress destIP = null;
-    private static int destPort = 1337;
+    private static InetAddress destIP;
+    private static int destPort;
 
     static Reply handleRequest(Request request){
         byte[] serializedRequest = Serializer.serialize(request);
         assert serializedRequest != null;
         byte[] reply = null;
         try {
+            sendConnectingHandshake();
             Sender.send(serializedRequest);
             reply = Receiver.getReply();
         }
@@ -39,6 +41,8 @@ public class ClientController {
             clientSocket = new DatagramSocket(changePort());
             clientSocket.setSoTimeout(10000);
             setDestIP("localhost");
+            System.out.print("Please enter a port that you want connect to:\n>");
+            setDestPort(changePort());
             System.out.println("Port has been successfully changed.");
         }
         catch (BindException e){

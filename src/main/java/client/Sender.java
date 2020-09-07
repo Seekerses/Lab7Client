@@ -9,8 +9,9 @@ class Sender {
     static void send(byte[] data) throws IOException{
         DatagramPacket commandPacket;
         DatagramPacket handle;
-        byte[] approver;
-        ClientController.sendConnectingHandshake();
+        byte[] clear = new byte[1024]; //std buffer for "everything OK" and exchanging done reply
+        clear[0] = 111;
+
         while(true) {
             if (data.length > 1012) {
                 commandPacket = new DatagramPacket(PacketUtils.formatData(Arrays.copyOfRange(data, 0, 1012)),
@@ -22,8 +23,7 @@ class Sender {
             }
             ClientController.getClientSocket().send(commandPacket);
 
-            approver = new byte[1024];
-            handle = new DatagramPacket(approver,1024);
+            handle = new DatagramPacket(new byte[1024],1024);
             ClientController.getClientSocket().receive(handle);
 
             if ( handle.getData()[0] == 111 ){
@@ -34,7 +34,8 @@ class Sender {
             }
         }
 
-        commandPacket.setData(new byte[1024]);
+        commandPacket.setData(clear);
         ClientController.getClientSocket().send(commandPacket);
+        System.out.println("done");
     }
 }

@@ -6,24 +6,17 @@ import java.io.*;
 
 class Serializer {
 
-    private static ObjectOutputStream objectOutputStream;
-    private static ByteArrayOutputStream baos;
-
-    static {
-        try {
-            baos = new ByteArrayOutputStream();
-            objectOutputStream = new ObjectOutputStream(baos);
-        } catch (IOException e) {
-            System.out.println("Some IO errors occurs.");
-        }
-    }
 
     static <T> byte[] serialize(T obj){
         byte[] buff;
         try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(baos);
             objectOutputStream.writeObject(obj);
             objectOutputStream.flush();
             buff = baos.toByteArray();
+            objectOutputStream.close();
+            baos.close();
             return buff;
         }
         catch (IOException e){

@@ -8,6 +8,7 @@ class PacketUtils {
         int hashCode = Arrays.hashCode(Arrays.copyOfRange(data,0,1012));
         int code = uniteIntoInt(Arrays.copyOfRange(data,1013,1024));
         return (hashCode == code * data[1012]);
+
     }
 
     static byte[] merge(byte[] a1, byte[] a2){

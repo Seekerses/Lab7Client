@@ -9,17 +9,19 @@ class Receiver {
     static byte[] getReply() throws IOException {
 
         byte[] buf = new byte[1024]; //buffer for coming bytes
-        byte[] clear = new byte[1024]; //std buffer for "everything OK" and exchanging done reply
+        byte[] clear = new byte[1024]; //std buffer for "everything OK"  reply
         byte[] bad = new byte[1024]; //std buffer for "something went wrong" reply
+        byte[] done = new byte[1024]; //std buffer for exchanging done reply
         clear[0] = 111; // Ok signal
         bad[0] = 22; // Error signal
-
+        done[0] = 33;
+        DatagramPacket fromServer = new DatagramPacket(buf, 1024);
+        ClientController.getClientSocket().receive(fromServer);
         byte[] result = new byte[0];
         while (true) {
-            DatagramPacket fromServer = new DatagramPacket(buf, 1024);
             ClientController.getClientSocket().receive(fromServer);
 
-            if (Arrays.equals(fromServer.getData(), clear)) {
+            if (Arrays.equals(fromServer.getData(), done)) {
                 break;
             }
 
@@ -36,7 +38,6 @@ class Receiver {
             }
 
         }
-        System.out.println(Arrays.toString(result));
         return result;
     }
 }

@@ -9,10 +9,11 @@ class Sender {
     static void send(byte[] data) throws IOException{
         DatagramPacket commandPacket;
         DatagramPacket handle;
-        byte[] clear = new byte[1024]; //std buffer for "everything OK" and exchanging done reply
-        clear[0] = 111;
+        byte[] done = new byte[1024]; //std buffer for exchanging done reply
+        done[0] = 33;
+        boolean last = false;
 
-        while(true) {
+        while(!last) {
             if (data.length > 1012) {
                 commandPacket = new DatagramPacket(PacketUtils.formatData(Arrays.copyOfRange(data, 0, 1012)),
                         1024, ClientController.getDestIP(), ClientController.getDestPort());
@@ -20,6 +21,7 @@ class Sender {
             else {
                 commandPacket = new DatagramPacket(PacketUtils.formatData(Arrays.copyOf(data,1012)),
                         1024, ClientController.getDestIP(), ClientController.getDestPort());
+                last = true;
             }
             ClientController.getClientSocket().send(commandPacket);
 
@@ -30,12 +32,13 @@ class Sender {
                 if ( data.length > 1012 ) {
                     data = Arrays.copyOfRange(data, 1012, data.length);
                 }
-                else break;
+            }
+            else {
+                last = false;
             }
         }
 
-        commandPacket.setData(clear);
+        commandPacket = new DatagramPacket(done,1024, ClientController.getDestIP(), ClientController.getDestPort());
         ClientController.getClientSocket().send(commandPacket);
-        System.out.println("done");
     }
 }

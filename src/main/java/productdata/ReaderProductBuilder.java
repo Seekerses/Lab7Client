@@ -18,7 +18,7 @@ public class ReaderProductBuilder {
         Float price = null;
         UnitOfMeasure unitOfMeasure = null;
         Organization manufacturer = null;
-        System.out.println("Enter product name:");
+        System.out.print("Enter product name:\n>");
         while (name == null) {
             try {
                 name = reader.readLine();
@@ -36,6 +36,7 @@ public class ReaderProductBuilder {
             if ("yes".equals(reader.readLine())) {
                 while (price == null) {
                     try {
+                        System.out.print(">");
                         price = Float.parseFloat(reader.readLine());
                     } catch (Exception e) {
                         System.out.println("Invalid value");
@@ -52,12 +53,12 @@ public class ReaderProductBuilder {
         }
         LocalDateTime creationDate = LocalDateTime.now();
         Coordinates coordinates = buildCoordinates(reader);
-        System.out.println("Enter units of measure: \n" +
+        System.out.print("Enter units of measure: \n" +
                 "    KILOGRAMS,\n" +
                 "    CENTIMETERS,\n" +
                 "    PCS,\n" +
                 "    LITERS,\n" +
-                "    MILLILITERS;");
+                "    MILLILITERS;\n>");
 
         while (unitOfMeasure == null) {
             try {
@@ -116,7 +117,7 @@ public class ReaderProductBuilder {
     private static Coordinates buildCoordinates(BufferedReader reader){
         double x;
         Integer y = null;
-        System.out.println("Enter product coordinates. Enter x coordinate:");
+        System.out.print("Enter product coordinates. Enter x coordinate:\n>");
         while (true){
             try {
                 x = Double.parseDouble(reader.readLine());
@@ -125,7 +126,7 @@ public class ReaderProductBuilder {
                 System.out.println("Error: invalid value.");
             }
         }
-        System.out.println("Enter y coordinate:");
+        System.out.print("Enter y coordinate:\n>");
         while (y == null) {
             try {
                 y = Integer.parseInt(reader.readLine());
@@ -154,7 +155,7 @@ public class ReaderProductBuilder {
         OrganizationType type = null;
         Address postalAddress = null;
         try {
-            System.out.println("Enter organization name:");
+            System.out.print("Enter organization name:\n>");
             while (name == null) {
                 try {
                     name = reader.readLine();
@@ -166,7 +167,7 @@ public class ReaderProductBuilder {
                     System.out.println("Error: empty value. Enter organization name:");
                 }
             }
-            System.out.println("Enter the name of the organization");
+            System.out.print("Enter the full name of the organization:\n>");
             while (fullName == null) {
                 while(fullName == null) {
                     try {
@@ -230,7 +231,7 @@ public class ReaderProductBuilder {
     private static Address buildAddress(BufferedReader reader){
         String street = null;
         Location town = null;
-        System.out.println("Enter street: ");
+        System.out.print("Enter street: \n>");
         while (street == null) {
             try {
                 street = reader.readLine();
@@ -259,7 +260,7 @@ public class ReaderProductBuilder {
         int y = 0;
         Long z = null;
         try {
-            System.out.println("Enter the coordinates of the organization. Enter the x coordinate:");
+            System.out.print("Enter the coordinates of the organization. Enter the x coordinate:\n>");
             while(x == null) {
                 try {
                     x = Long.parseLong(reader.readLine());
@@ -269,7 +270,7 @@ public class ReaderProductBuilder {
                     x = null;
                 }
             }
-            System.out.println("Enter y coordinate:");
+            System.out.print("Enter y coordinate:\n>");
             while (true){
                 try {
                     y = Integer.parseInt(reader.readLine());
@@ -279,7 +280,7 @@ public class ReaderProductBuilder {
                 }
             }
 
-            System.out.println("Enter z coordinate:");
+            System.out.print("Enter z coordinate:\n>");
             while(z == null) {
                 try {
                     z = Long.parseLong(reader.readLine());

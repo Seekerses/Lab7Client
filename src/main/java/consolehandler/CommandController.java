@@ -1,5 +1,6 @@
 package consolehandler;
 
+import client.UserSession;
 import cmd.CommandHistory;
 
 import java.io.BufferedReader;
@@ -29,9 +30,12 @@ public class CommandController {
         try {
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-            registration(interpreter, reader);
+            registration(interpreter);
 
             String line = reader.readLine();
+            System.out.println("Enter Command " +
+                    "or Help to display a list of commands:");
+            System.out.print(">");
             while (isOn){
                 if(line == null){
                     System.exit(0);
@@ -52,8 +56,8 @@ public class CommandController {
     public static void registration(Interpreter interpreter){
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
-            while (Userfata.login && Userdata.pass == null) {
-                System.out.println("Doy you want register or login?\nr - register\nany - login");
+            while (UserSession.getLogin() == null && UserSession.getPassword() == null) {
+                System.out.println("Do you want register or login?\nr - register\nany - login");
                 String line = reader.readLine();
                 if ("r".equals(line)) {
                     String[] reg = new String[]{"register"};

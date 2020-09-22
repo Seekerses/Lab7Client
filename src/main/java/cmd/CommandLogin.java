@@ -1,5 +1,7 @@
 package cmd;
 
+import client.UserSession;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -18,11 +20,11 @@ public class CommandLogin implements Command, Preparable, Registerable {
     @Override
     public void prepare(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter login:\n>");
+        System.out.print("Enter login:\n>");
         login = scanner.next().trim();
-        System.out.println("Enter password:\n>");
+        System.out.print("Enter password:\n>");
         password = scanner.next().trim();
-        UserData.login = login;
-        UserData.password = password;
+        UserSession.setLogin(login);
+        UserSession.setPassword(password);
     }
 }

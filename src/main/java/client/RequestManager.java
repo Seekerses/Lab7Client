@@ -42,8 +42,8 @@ public class RequestManager {
                 ((Preparable) cmd).prepare(args);
             }
         }
-        Reply result = ClientController.handleRequest(new Request(cmd, args, UserData.login, Userdata.password));
-        if (cmd instanceof Registerable){
+        Reply result = ClientController.handleRequest(new Request(cmd, args, UserSession.getLogin(), UserSession.getPassword()));
+        if (cmd instanceof Registerable && result != null){
             if (!"Approved".equals(result.getAnswer())){
                 CommandController.registration(new CommandInterpreter());
             }

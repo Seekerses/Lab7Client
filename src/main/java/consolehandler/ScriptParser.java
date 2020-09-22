@@ -4,6 +4,7 @@ import consolehandler.cmdLists.StdCommandList;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Class that parse the script files

@@ -27,7 +27,10 @@ public class CommandController {
     public void start(Interpreter interpreter){
         isOn = true;
         try {
+
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            registration(interpreter, reader);
+
             String line = reader.readLine();
             while (isOn){
                 if(line == null){
@@ -43,6 +46,25 @@ public class CommandController {
         }
         catch (IOException e){
             System.out.println("Invalid symbol sequence, enter correct command or enter help to get a list of commands...");
+        }
+    }
+
+    public static void registration(Interpreter interpreter){
+
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+            while (Userfata.login && Userdata.pass == null) {
+                System.out.println("Doy you want register or login?\nr - register\nany - login");
+                String line = reader.readLine();
+                if ("r".equals(line)) {
+                    String[] reg = new String[]{"register"};
+                    interpreter.handle(reg);
+                } else {
+                    interpreter.handle(new String[]{"login"});
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Bad input");
+            registration(interpreter);
         }
     }
 

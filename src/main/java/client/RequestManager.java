@@ -5,6 +5,10 @@ import clientserverdata.Request;
 import cmd.Command;
 import cmd.Local;
 import cmd.Preparable;
+import cmd.Registerable;
+import consolehandler.CommandController;
+import consolehandler.CommandInterpreter;
+
 import java.io.IOException;
 
 public class RequestManager {
@@ -16,7 +20,7 @@ public class RequestManager {
             cmd = command.getClass().newInstance();
         }
         catch (InstantiationException e){
-            System.out.println("Command have not nullary constructor.");
+            System.out.println("Command have not nullify constructor.");
         }
         catch (IllegalAccessException e){
             System.out.println("Why do we lost access to cmd ?");
@@ -38,11 +42,22 @@ public class RequestManager {
                 ((Preparable) cmd).prepare(args);
             }
         }
-        Reply result = ClientController.handleRequest(new Request(cmd, args));
+        Reply result = ClientController.handleRequest(new Request(cmd, args, UserData.login, Userdata.password));
+        if (cmd instanceof Registerable){
+            if (!"Approved".equals(result.getAnswer())){
+                CommandController.registration(new CommandInterpreter());
+            }
+        }
         if (result != null) {
             if (result.getAnswer() != null) System.out.println(result.getAnswer());
             if (result.getProducts() != null){
-                result.getProducts().forEach((k) -> System.out.println(k.toString()));
+                result.getProducts().forEach((k) -> {
+                    if ((k == null)) {
+                        System.out.print("");
+                    } else {
+                        System.out.println(k.toString());
+                    }
+                });
             }
         }
 

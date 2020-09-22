@@ -17,6 +17,7 @@ public class ClientController {
     static Reply handleRequest(Request request){
         byte[] serializedRequest = Serializer.serialize(request);
         assert serializedRequest != null;
+        System.out.println(clientSocket.getInetAddress());
         byte[] reply = null;
         try {
             sendConnectingHandshake();
@@ -38,8 +39,8 @@ public class ClientController {
         try {
             System.out.print("Please enter a port that you want bind to:\n>");
             clientSocket = new DatagramSocket(changePort());
-            clientSocket.setSoTimeout(10000);
-            setDestIP("localhost");
+            clientSocket.setSoTimeout(100);
+            setDestIP("230.0.0.0");
             System.out.print("Please enter a port that you want connect to:\n>");
             setDestPort(changePort());
             System.out.println("Port has been successfully changed.");
@@ -87,8 +88,10 @@ public class ClientController {
 
     public static void connect(int number){
         try {
-            clientSocket = new DatagramSocket(number);
-            clientSocket.setSoTimeout(1000);
+            setDestIP("230.0.0.0");
+            setDestPort(3333);
+            clientSocket = new DatagramSocket(new InetSocketAddress(number));
+            clientSocket.setSoTimeout(100);
             System.out.println("Port has been successfully changed.");
         }
         catch (BindException e){

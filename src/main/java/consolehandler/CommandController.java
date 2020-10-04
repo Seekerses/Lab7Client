@@ -53,9 +53,10 @@ public class CommandController {
         }
     }
 
-    public static void registration(Interpreter interpreter){
+    static void registration(Interpreter interpreter){
 
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             while (UserSession.getLogin() == null && UserSession.getPassword() == null) {
                 System.out.println("Do you want register or login?\nr - register\nany - login");
                 String line = reader.readLine();

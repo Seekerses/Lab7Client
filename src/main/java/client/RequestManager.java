@@ -44,9 +44,20 @@ public class RequestManager {
         }
         Reply result = ClientController.handleRequest(new Request(cmd, args, UserSession.getLogin(), UserSession.getPassword()));
         if (cmd instanceof Registerable && result != null){
-            if (!"Approved".equals(result.getAnswer())){
-                CommandController.registration(new CommandInterpreter());
+            switch (result.getAnswer().split(",")[0]){
+                case "Approved" :
+                    UserSession.setLogin(result.getAnswer().split(",")[1]);
+                    UserSession.setPassword(result.getAnswer().split(",")[2]);
+                    System.out.println("You are logged in as " + UserSession.getLogin());
+                    break;
+                case "Wrong" :
+                    System.out.println("Wrong login or password" + UserSession.getLogin());
+                    break;
+                case "Existed" :
+                    System.out.println("User already exist, please use log in.");
+                    break;
             }
+            return;
         }
         if (result != null) {
             if (result.getAnswer() != null) System.out.println(result.getAnswer());

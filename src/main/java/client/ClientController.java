@@ -17,7 +17,6 @@ public class ClientController {
     static Reply handleRequest(Request request){
         byte[] serializedRequest = Serializer.serialize(request);
         assert serializedRequest != null;
-        System.out.println(clientSocket.getInetAddress());
         byte[] reply = null;
         try {
             sendConnectingHandshake();

@@ -1,5 +1,7 @@
 package cmd;
 
+import client.UserSession;
+
 import java.io.IOException;
 import java.util.Scanner;
 

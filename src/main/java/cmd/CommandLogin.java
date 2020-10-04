@@ -24,7 +24,5 @@ public class CommandLogin implements Command, Preparable, Registerable {
         login = scanner.next().trim();
         System.out.print("Enter password:\n>");
         password = scanner.next().trim();
-        UserSession.setLogin(login);
-        UserSession.setPassword(password);
     }
 }

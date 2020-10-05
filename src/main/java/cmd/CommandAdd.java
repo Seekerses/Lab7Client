@@ -1,4 +1,5 @@
 package cmd;
+import client.UserSession;
 import consolehandler.Initializer;
 import consolehandler.TableController;
 import productdata.Product;
@@ -17,6 +18,8 @@ import java.io.Serializable;
 public class CommandAdd implements Command, Preparable, Serializable {
 
 
+    private String login;
+    private String password;
 
     Product product;
     String key;
@@ -30,7 +33,6 @@ public class CommandAdd implements Command, Preparable, Serializable {
     @Override
     public String execute(String[] args) {
         if (product == null || key == null){
-            System.out.print(key);
             prepare(args);
             execute(args);
         }
@@ -54,6 +56,8 @@ public class CommandAdd implements Command, Preparable, Serializable {
 
     @Override
     public void prepare(String[] args) {
+        login = UserSession.getLogin();
+        password = UserSession.getPassword();
         if (args == null) {
             String key;
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));

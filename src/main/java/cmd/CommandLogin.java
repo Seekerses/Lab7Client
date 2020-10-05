@@ -13,7 +13,7 @@ public class CommandLogin implements Command, Preparable, Registerable {
 
     @Override
     public String execute(String[] args) throws IOException {
-        //Логика запроса к БД
+        prepare(args);
         return "Approved";
     }
 

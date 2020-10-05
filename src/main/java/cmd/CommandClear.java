@@ -1,4 +1,5 @@
 package cmd;
+import client.UserSession;
 import consolehandler.TableController;
 
 /**
@@ -7,12 +8,19 @@ import consolehandler.TableController;
  *
  */
 
-public class CommandClear implements Command {
+public class CommandClear implements Command, Preparable {
+
+    private String password;
+    private String login;
 
     private static final long serialVersionUID = 1337000002L;
 
     @Override
     public String execute(String[] args) {
+        if (password == null || login == null){
+            prepare(args);
+            execute(args);
+        }
         try {
             if (args.length == 1) {
                 return ("There is no args for this command!");
@@ -36,5 +44,11 @@ public class CommandClear implements Command {
 
     public String toString(){
         return "clear";
+    }
+
+    @Override
+    public void prepare(String[] args) {
+        login = UserSession.getLogin();
+        password = UserSession.getPassword();
     }
 }

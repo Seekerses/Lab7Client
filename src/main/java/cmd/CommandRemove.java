@@ -1,4 +1,5 @@
 package cmd;
+import client.UserSession;
 import consolehandler.TableController;
 
 /**
@@ -8,6 +9,9 @@ import consolehandler.TableController;
  */
 
 public class CommandRemove implements Command {
+
+    private String login = UserSession.getLogin();
+    private String password = UserSession.getPassword();
 
     private static final long serialVersionUID = 1337000012L;
 

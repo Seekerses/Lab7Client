@@ -1,9 +1,11 @@
 package cmd;
 
+import client.UserSession;
 import consolehandler.TableController;
 import productdata.Product;
 import productdata.ReaderProductBuilder;
 
+import javax.jws.soap.SOAPBinding;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Iterator;
@@ -26,6 +28,8 @@ public class CommandUpdate implements Command, Preparable{
      */
 
     Product product = null;
+    private String password;
+    private String login;
 
     @Override
     public String execute(String[] args) {
@@ -71,6 +75,8 @@ public class CommandUpdate implements Command, Preparable{
 
     @Override
     public void prepare(String[] args) {
+        login = UserSession.getLogin();
+        password = UserSession.getPassword();
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         this.product = ReaderProductBuilder.buildProduct(reader);
     }

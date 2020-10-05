@@ -1,4 +1,5 @@
 package cmd;
+import client.UserSession;
 import consolehandler.TableController;
 import productdata.Product;
 import productdata.ReaderProductBuilder;
@@ -14,6 +15,9 @@ import java.util.*;
  */
 
 public class Commandreplace_if_greater implements Command{
+
+    private String login = UserSession.getLogin();
+    private String password = UserSession.getPassword();
 
     private static final long serialVersionUID = 1337000014L;
 

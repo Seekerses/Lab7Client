@@ -30,7 +30,6 @@ public class CommandController {
         try {
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-            registration(interpreter);
 
             String line = reader.readLine();
             System.out.println("Enter Command " +
@@ -53,7 +52,7 @@ public class CommandController {
         }
     }
 
-    static void registration(Interpreter interpreter){
+    public static void registration(Interpreter interpreter){
 
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -68,8 +67,8 @@ public class CommandController {
                 }
             }
         } catch (IOException e) {
+            e.printStackTrace();
             System.out.println("Bad input");
-            registration(interpreter);
         }
     }
 

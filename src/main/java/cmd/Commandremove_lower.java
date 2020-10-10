@@ -1,4 +1,5 @@
 package cmd;
+import client.UserSession;
 import consolehandler.TableController;
 import productdata.Product;
 
@@ -10,9 +11,12 @@ import java.util.*;
  * @author Alexandr
  */
 
-public class Commandremove_lower implements Command{
+public class Commandremove_lower implements Command, Preparable{
 
     private static final long serialVersionUID = 1337000013L;
+
+    private String login;
+    private String password;
 
     /**
      * Iterates through hashtable and remove all elements with id lower than one's given
@@ -22,6 +26,9 @@ public class Commandremove_lower implements Command{
 
     @Override
     public String execute(String[] args) {
+        if(login == null || password == null){
+            prepare(args);
+        }
         try {
             Iterator<Map.Entry<String, Product>> it = TableController.getCurrentTable().getSet().iterator();
             int i = Integer.parseInt(args[0]);
@@ -48,5 +55,11 @@ public class Commandremove_lower implements Command{
     @Override
     public String toString() {
         return "remove_lower";
+    }
+
+    @Override
+    public void prepare(String[] args) {
+        login = UserSession.getLogin();
+        password = UserSession.getPassword();
     }
 }

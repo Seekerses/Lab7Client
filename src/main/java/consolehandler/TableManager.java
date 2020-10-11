@@ -169,4 +169,7 @@ public class TableManager {
         return table.keySet();
     }
 
+    public void setTable(Hashtable<String, Product> table) {
+        this.table = table;
+    }
 }

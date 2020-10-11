@@ -62,11 +62,11 @@ public class RequestManager {
         if (result != null) {
             if (result.getAnswer() != null) System.out.println(result.getAnswer());
             if (result.getProducts() != null){
-                result.getProducts().forEach((k) -> {
+                result.getProducts().forEach((k,v) -> {
                     if ((k == null)) {
                         System.out.print("");
                     } else {
-                        System.out.println(k.toString());
+                        System.out.println(v + " " + k);
                     }
                 });
             }

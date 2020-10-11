@@ -27,7 +27,8 @@ public class ClientController {
         try {
             sendRequestingHandshake();
             Sender.send(serializedRequest);
-            reply = Receiver.getReply();
+            Receiver receiver = new Receiver();
+            reply = receiver.getReply(clientSocket);
         }
         catch(SocketTimeoutException e){
             System.out.println("Server is not responding, please, try again later or change connection.");
@@ -52,7 +53,7 @@ public class ClientController {
             System.out.print("Please enter a port that you want connect to:\n>");
             setDestPort(changePort());
             System.out.println("Port has been successfully changed.");
-             if(sendConnectingHandshake()){
+            if(sendConnectingHandshake()){
                  System.out.println("Connection stabled.");
              }
              else {
@@ -60,6 +61,7 @@ public class ClientController {
                  connect();
              }
             CommandController.registration(new ClientInterpreter());
+            new Thread(new UpdateController()).start();
         }
         catch (SocketTimeoutException ex){
             System.out.println("Chosen server is not responding. Please try again...\n");
@@ -166,6 +168,10 @@ public class ClientController {
 
     public static void setTempPort(int tempPort) {
         ClientController.tempPort = tempPort;
+    }
+
+    public static Integer getPort() {
+        return port;
     }
 }
 

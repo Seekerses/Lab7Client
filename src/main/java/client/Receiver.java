@@ -4,11 +4,12 @@ import clientserverdata.Reply;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
+import java.net.DatagramSocket;
 import java.util.Arrays;
 
 class Receiver {
 
-    static byte[] getReply() throws IOException {
+    byte[] getReply(DatagramSocket socket) throws IOException {
 
         byte[] buf = new byte[1024]; //buffer for coming bytes
         byte[] clear = new byte[1024]; //std buffer for "everything OK"  reply
@@ -18,28 +19,26 @@ class Receiver {
 
         DatagramPacket fromServer = new DatagramPacket(buf, 1024);
 
-        ClientController.getClientSocket().receive(fromServer);
+        socket.receive(fromServer);
         Reply newAdr = Serializer.deserialize(fromServer.getData());
-        System.out.println(newAdr.getAnswer());
-        ClientController.setTempPort(ClientController.getDestPort());
-        ClientController.setDestPort(Integer.parseInt(newAdr.getAnswer().split(":")[1]));
+
+        int destPort = (Integer.parseInt(newAdr.getAnswer().split(":")[1]));
 
         DatagramPacket toServer = new DatagramPacket(clear,
-                1024, ClientController.getDestIP(), ClientController.getDestPort());
+                1024, ClientController.getDestIP(),destPort);
 
 
         byte[] result = new byte[0];
         while (true) {
 
-            ClientController.getClientSocket().receive(fromServer);
+            socket.receive(fromServer);
             if (Arrays.equals(fromServer.getData(), done)) {
-                ClientController.getClientSocket().send(toServer);
+                socket.send(toServer);
                 break;
             }
-                ClientController.getClientSocket().send(toServer);
+                socket.send(toServer);
                 result = PacketUtils.merge(result,fromServer.getData());
         }
-        ClientController.setDestPort(ClientController.getTempPort());
         return result;
     }
 }

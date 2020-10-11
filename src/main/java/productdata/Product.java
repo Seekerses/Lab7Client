@@ -1,4 +1,5 @@
 package productdata;
+import clientserverdata.User;
 import exceptions.NegativePrice;
 
 import java.io.Serializable;
@@ -15,6 +16,7 @@ public class Product implements Serializable {
     private Float price; //Поле может быть null, Значение поля должно быть больше 0
     private UnitOfMeasure unitOfMeasure; //Поле не может быть null
     private Organization manufacturer; //Поле может быть null
+    private User owner;
 
     /**
      * Standart Product constructor
@@ -135,5 +137,13 @@ public class Product implements Serializable {
 
     public static  void setIdCounter(int value){
         idCounter = value;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 }

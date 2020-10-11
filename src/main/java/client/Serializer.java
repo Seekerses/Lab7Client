@@ -3,6 +3,7 @@ package client;
 import clientserverdata.Reply;
 
 import java.io.*;
+import java.util.Arrays;
 
 class Serializer {
 

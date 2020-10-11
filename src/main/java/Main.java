@@ -8,6 +8,9 @@ public class Main {
         ClientController.connect();
         System.out.print("\n");
 
+        TableManager prodTable = new TableManager("products");
+        TableController.setCurrentTable(prodTable);
+
         CommandController cmd = new CommandController();
         cmd.start(new ClientInterpreter());
         cmd.stop();

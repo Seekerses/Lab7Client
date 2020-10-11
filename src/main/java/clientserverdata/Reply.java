@@ -3,20 +3,22 @@ package clientserverdata;
 import productdata.Product;
 
 import java.io.Serializable;
-import java.util.concurrent.ConcurrentSkipListSet;
+import java.net.InetSocketAddress;
+import java.util.Hashtable;
 
 public class Reply implements Serializable {
 
-    private ConcurrentSkipListSet<Product> products;
+    private Hashtable<String,Product> products;
     private String answer;
+    private InetSocketAddress address;
     private static final long serialVersionUID = 1338L;
 
-    public Reply(ConcurrentSkipListSet<Product> collection, String message){
+    public Reply(Hashtable<String,Product> collection, String message){
         this.products = collection;
         this.answer = message;
     }
 
-    public ConcurrentSkipListSet<Product> getProducts(){
+    public Hashtable<String,Product> getProducts(){
         return products;
     }
 
@@ -24,4 +26,11 @@ public class Reply implements Serializable {
         return answer;
     }
 
+    public InetSocketAddress getAddress() {
+        return address;
+    }
+
+    public void setAddress(InetSocketAddress address) {
+        this.address = address;
+    }
 }

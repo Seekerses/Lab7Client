@@ -53,6 +53,15 @@ public class ClientController {
             System.out.print("Please enter a port that you want connect to:\n>");
             setDestPort(changePort());
             System.out.println("Port has been successfully changed.");
+            try {
+                UpdateController updater = new UpdateController();
+                new Thread(updater).start();
+            }
+            catch (IOException e){
+                System.out.println("Service port is already in use. Updater os down.");
+            }
+
+            Thread.sleep(1000);
             if(sendConnectingHandshake()){
                  System.out.println("Connection stabled.");
              }
@@ -61,7 +70,6 @@ public class ClientController {
                  connect();
              }
             CommandController.registration(new ClientInterpreter());
-            new Thread(new UpdateController()).start();
         }
         catch (SocketTimeoutException ex){
             System.out.println("Chosen server is not responding. Please try again...\n");
@@ -76,6 +84,8 @@ public class ClientController {
             connect();
         } catch (IOException e) {
             System.out.println("Some IO errors occurs");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 

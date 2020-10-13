@@ -10,12 +10,17 @@ import java.net.SocketException;
 import java.util.Arrays;
 
 public class UpdateController implements Runnable {
+
+    private DatagramSocket updaterSocket;
+
+    public  UpdateController() throws SocketException {
+        DatagramSocket updaterSocket = new DatagramSocket(ClientController.getPort()+1);
+        updaterSocket.setSoTimeout(0);
+    }
     @Override
     public void run() {
 
         try {
-            DatagramSocket updaterSocket = new DatagramSocket(ClientController.getPort()+1);
-            updaterSocket.setSoTimeout(0);
 
             while(true) {
 

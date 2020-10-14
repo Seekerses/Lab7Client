@@ -20,6 +20,7 @@ class Receiver {
         DatagramPacket fromServer = new DatagramPacket(buf, 1024);
 
         socket.receive(fromServer);
+        System.out.println("addr" + Arrays.toString(fromServer.getData()));
         Reply newAdr = Serializer.deserialize(fromServer.getData());
 
         int destPort = (Integer.parseInt(newAdr.getAnswer().split(":")[1]));
@@ -32,6 +33,7 @@ class Receiver {
         while (true) {
 
             socket.receive(fromServer);
+            System.out.println(Arrays.toString(fromServer.getData()));
             if (Arrays.equals(fromServer.getData(), done)) {
                 socket.send(toServer);
                 break;

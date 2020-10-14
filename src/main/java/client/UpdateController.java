@@ -14,7 +14,7 @@ public class UpdateController implements Runnable {
     private DatagramSocket updaterSocket;
 
     public  UpdateController() throws SocketException {
-        DatagramSocket updaterSocket = new DatagramSocket(ClientController.getPort()+1);
+        updaterSocket = new DatagramSocket(ClientController.getPort()+1);
         updaterSocket.setSoTimeout(0);
     }
     @Override
@@ -27,6 +27,7 @@ public class UpdateController implements Runnable {
                 DatagramPacket fromServer = new DatagramPacket(new byte[1024], 1024);
 
                 updaterSocket.receive(fromServer);
+                System.out.println(Arrays.toString(fromServer.getData()));
 
                 Receiver receiver = new Receiver();
                 Reply update = Serializer.deserialize(receiver.getReply(updaterSocket));
@@ -39,6 +40,10 @@ public class UpdateController implements Runnable {
             run();
         } catch (IOException e) {
             e.printStackTrace();
+            run();
+        }
+        catch (NullPointerException e){
+            System.out.println("Restarting updater");
             run();
         }
     }
